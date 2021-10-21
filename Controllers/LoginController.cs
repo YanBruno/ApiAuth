@@ -11,9 +11,9 @@ namespace ApiAuth.Controllers
     public class LoginController : ControllerBase{
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] User model){
-            
-            var user = UserRepository.GetUser(model.Username, model.Password);
+        public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] User model)
+        {
+            var user = await UserRepository.GetUser(model.Username, model.Password);
 
             if(user == null)
                 return NotFound(new {message = "Usuário não encontado"});

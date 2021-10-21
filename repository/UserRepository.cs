@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ApiAuth.Models;
 
 namespace ApiAuth.Repository
@@ -15,12 +16,17 @@ namespace ApiAuth.Repository
                 new(){Id = 1, Username = "joao", Password = "123", Role = "employee"}
             };
         
-        public static IEnumerable<User> GetUsers() => _users;
+        public async static Task<IEnumerable<User>> GetUsers(){
+            await Task.Delay(5000);
+            return _users;
+        }
         
-        public static User GetUser(string username, string password) =>
-            _users.FirstOrDefault(
+        public async static Task<User> GetUser(string username, string password) {
+            await Task.Delay(3000);
+            return _users.FirstOrDefault(
                 u => u.Username == username
                 && u.Password == password
             );
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using System.Threading.Tasks;
+using ApiAuth.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +28,12 @@ namespace ApiAuth.Controllers
         [HttpGet]
         [Route("manager")]
         [Authorize(Roles = "manager")]
-        public string Manager() => $"Gerente - {User.Identity.Name}";
-
+        public async Task<ActionResult<dynamic>> Manager() {
+            var users = await UserRepository.GetUsers();
+            return new {
+            message = $"Acesso Gerente - {User.Identity.Name}",
+            users
+        };
+        } 
     }
 }
