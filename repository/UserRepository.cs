@@ -10,8 +10,9 @@ namespace ApiAuth.Repository
 
         static UserRepository() => 
             _users = new List<User>{
+                new(){Id = 1, Username = "batman", Password = "batman", Role = "manager"},
                 new(){Id = 1, Username = "yansantos", Password = "123", Role = "manager"},
-                new(){Id = 1, Username = "joao", Password = "123", Role = "emploey"}
+                new(){Id = 1, Username = "joao", Password = "123", Role = "employee"}
             };
         
         public static IEnumerable<User> GetUsers() => _users;

@@ -12,14 +12,13 @@ namespace ApiAuth.Controllers
         [HttpPost]
         [Route("login")]
         public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] User model){
+            
             var user = UserRepository.GetUser(model.Username, model.Password);
 
             if(user == null)
                 return NotFound(new {message = "Usuário não encontado"});
 
-
-            var token = TokenService.GenerateToken(model);
-
+            var token = TokenService.GenerateToken(user);
             user.Password = "";
 
             return new {
@@ -27,5 +26,7 @@ namespace ApiAuth.Controllers
                 token
             };
         }
+    
+        
     }
 }
